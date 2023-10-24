@@ -1,13 +1,15 @@
-<?php 
+<?php
 
-function autoload() {
-    $files = scandir('../app/controllers');
-
-    foreach ($files as $file) {
-        if ($file != '.'&& $file != '..') {
-            include '../app/controllers/' . $file;
+class Autoloader
+{
+    public static function autoload($className)
+    {
+        $file = __DIR__ .'/../app/controllers/' . $className . '.php';
+        
+        if (file_exists($file)){
+            include $file;
         }
     }
-    
 }
-autoload();
+
+spl_autoload_register('Autoloader::autoload');
