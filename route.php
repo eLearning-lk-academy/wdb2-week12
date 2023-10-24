@@ -7,6 +7,14 @@ $routes = [
     'POST:/save' => ['HomeController', 'add'],
     '/page/:id' => ['HomeController', 'page'],
     'POST:/page/:id/:slug/:id' => ['HomeController', 'page'],
+
+    
+    '/user/:id' => ['UserController', 'index' ],
+    '/user/register' => ['UserController', 'register' ],
+    'POST:/user/register' => ['UserController', 'add' ],
+
+    '/user/login' => ['UserController', 'login' ],
+    'POST:/user/login' => ['UserController', 'login' ],
 ];
 
 $url = $_SERVER['REQUEST_URI'];

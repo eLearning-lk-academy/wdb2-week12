@@ -1,8 +1,9 @@
 <?php 
 
-include "../config/config.php";
-include "../core/db.php";
-include "../core/Autoloader.php";
+include __DIR__."/../config/config.php";
+include __DIR__."/db.php";
+include __DIR__."/Helpers.php";
+include __DIR__."/Autoloader.php";
 
 // function to return view file
 function view($view, $data=[]){

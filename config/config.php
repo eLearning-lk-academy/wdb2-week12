@@ -1,6 +1,6 @@
 <?php
 $mysql = [
-    "database" => "week9",
+    "database" => "wdb2_week10",
     "username" => "root",
     "password"=> "root",
     "host" => "localhost",

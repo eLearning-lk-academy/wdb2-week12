@@ -8,6 +8,9 @@ class Autoloader
         
         if (file_exists($file)){
             include $file;
+        }else{
+            $file = __DIR__ .'/../app/models/'. $className .'.php';
+            include $file;
         }
     }
 }
