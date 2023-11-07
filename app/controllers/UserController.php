@@ -1,5 +1,6 @@
 <?php 
 
+
 class UserController{
     public function index($id){
         $user = new UserModel();
@@ -59,9 +60,7 @@ class UserController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $userModel = new UserModel();
             if($user = $userModel->getByEmail($_POST['email'])){
-                $token = $user['token'];
-                $link = "http://localhost:8080/user/password-reset-verify?token={$token}";
-                dd($link);
+                $this->sendPasswordResetEmail($user);
             }else{
                 echo 'email not found';
             }
@@ -96,6 +95,30 @@ class UserController{
             header("Location: /user/password-reset");
         }
         
+    }
+
+    private function sendPasswordResetEmail($user){
+        try{
+            require __DIR__."/../libraries/Mailer.php";
+          
+            $mailer = new Mailer();
+           
+            $mailer->to($user['email'], $user['first_name']);  
+            $mailer->to("nuwan@nuwanr.dev", $user['first_name'].'dd');  
+               
+            $mailer->subject("Password Reset");
+            $mailer->message("<h1>Click this link</h1> to reset your password: <a href='http://localhost:8080/user/password-reset-verify?token={$user['token']}'>Reset Password</a>");
+    
+            if($mailer->send()){
+                dd('email sent');
+                return true;
+            }
+
+        }catch(Exception $e){
+            echo $mail->ErrorInfo;
+            dd($e);    
+        
+        }
     }
         
 
