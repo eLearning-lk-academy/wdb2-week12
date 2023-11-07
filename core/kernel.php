@@ -1,6 +1,5 @@
 <?php 
 
-include __DIR__."/../config/config.php";
 include __DIR__."/db.php";
 include __DIR__."/Helpers.php";
 include __DIR__."/Autoloader.php";
@@ -31,4 +30,8 @@ function view($view, $data=[]){
     }else{
         die("View $view not found");
     }
+}
+function base_url($url){
+    include __DIR__."/../config/config.php";
+    return $site['url'].$url;
 }

@@ -16,7 +16,7 @@ $smtp = [
 ];
 
 $site = [
-    'url' => 'http://localhost:8080',
+    'url' => 'http://localhost:8080/',
     'name' => 'WDB2 Week 11'
 ];
 
