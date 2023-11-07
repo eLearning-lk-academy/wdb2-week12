@@ -52,4 +52,53 @@ class UserController{
         }
     }
 
+    public function passwordReset(){
+        
+        $title = "User Password Reset";
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $userModel = new UserModel();
+            if($user = $userModel->getByEmail($_POST['email'])){
+                $token = $user['token'];
+                $link = "http://localhost:8080/user/password-reset-verify?token={$token}";
+                dd($link);
+            }else{
+                echo 'email not found';
+            }
+        }
+
+        view("user.password-reset", compact("title"));
+    }
+
+    public function verifyPasswordReset(){
+        if(!empty($_GET['token'])){
+            $token = $_GET['token'];
+            $userModel = new UserModel();
+
+            if($user = $userModel->getByToken($token)){
+
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    
+                    if($userModel->restPassword($user['id'], $_POST['password'])){
+                        echo 'password reset success';
+                        dd($user);
+                    };
+                }else{
+                    $title = "User Password Reset Verify";
+                    view("user.password-reset-verify", compact("title"));
+                }
+                
+            }else{
+                echo 'token not found';
+            }
+        }else{
+            echo 'token not found';
+            header("Location: /user/password-reset");
+        }
+        
+    }
+        
+
+
+
 }

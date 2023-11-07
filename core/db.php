@@ -53,4 +53,9 @@ class db
         return $this->db->lastInsertId();
     }
 
+    public function updateRow( $query, $params = array()){
+        $query = $this->query($query, $params);
+        return $query->rowCount();
+    }
+
 }

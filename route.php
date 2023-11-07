@@ -6,7 +6,7 @@ $routes = [
     '/save' => ['HomeController', 'save' ],
     'POST:/save' => ['HomeController', 'add'],
     '/page/:id' => ['HomeController', 'page'],
-    'POST:/page/:id/:slug/:id' => ['HomeController', 'page'],
+    'POST:/page/:id//:id' => ['HomeController', 'page'],
 
     
     '/user/:id' => ['UserController', 'index' ],
@@ -15,9 +15,19 @@ $routes = [
 
     '/user/login' => ['UserController', 'login' ],
     'POST:/user/login' => ['UserController', 'login' ],
+
+    '/user/password-reset' => ['UserController', 'passwordReset' ],
+    'POST:/user/password-reset' => ['UserController', 'passwordReset' ],
+
+    '/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
+    'POST:/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
+    
 ];
 
 $url = $_SERVER['REQUEST_URI'];
+// remove query string
+$url = explode('?', $url)[0];
+
 
 
 

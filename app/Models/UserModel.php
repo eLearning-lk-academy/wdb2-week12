@@ -19,6 +19,14 @@ class UserModel extends Model{
         ];
         return $this->db->getRow($sql, $params);
     }
+
+    public function getByToken($token){
+        $sql = "SELECT * FROM {$this->table} WHERE token = :token";
+        $params = [
+            ':token' => $token
+        ];
+        return $this->db->getRow($sql, $params);
+    }
     
     public function getAll(){
         $sql = 'SELECT * FROM users';
@@ -27,16 +35,35 @@ class UserModel extends Model{
     }
 
     public function add($data){
-        $sql = "INSERT INTO {$this->table} (first_name, last_name, email, username, password) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO {$this->table} (first_name, last_name, email, username, password, token) VALUES (?, ?, ?, ?, ?)";
         $params = [
             $data['first_name'],
             $data['last_name'],
             $data['email'],
             $data['username'],
-            $data['password']
+            $data['password'],
+            $this->generateToken()
         ];
         $result = $this->db->insertRow($sql, $params);
         return $result;
+    }
+
+    public function restPassword($id, $password){
+        $sql = "UPDATE {$this->table} SET password = :password, token = :token WHERE id = :id";
+
+        $params = [
+            ':password' => password_hash($password, PASSWORD_DEFAULT),
+            ':token' => $this->generateToken(),
+            ':id' => $id
+        ];
+        
+        $result = $this->db->updateRow($sql, $params);
+        return $result;
+    }
+
+    private function generateToken(){
+        $token = bin2hex(random_bytes(32));
+        return $token;
     }
 
 
