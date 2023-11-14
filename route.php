@@ -1,7 +1,7 @@
 <?php
 
 $routes = [
-    '/'  => ['HomeController', 'index' ],
+    ''  => ['HomeController', 'index' ],
 
     '/user/:id' => ['UserController', 'index' ],
     '/user/register' => ['UserController', 'register' ],
@@ -16,6 +16,9 @@ $routes = [
 
     '/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
     'POST:/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
+
+    '/products'=> ['WebProductController', 'index'],
+    '/product/:slug'=> ['WebProductController', 'show'],
 
 
     // admin
@@ -37,6 +40,7 @@ $routes = [
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 $url = explode('?', $url)[0];
+$url = rtrim($url,'/');
 
 
 

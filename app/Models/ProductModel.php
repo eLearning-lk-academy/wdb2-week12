@@ -15,6 +15,12 @@ class ProductModel extends Model{
         return $result;
     }
 
+    public function getBySlug($slug){
+        $sql = "SELECT * FROM {$this->table} WHERE slug = ?";
+        $result = $this->db->getRow($sql, [$slug]);
+        return $result;
+    }
+
     public function add($data){
         $sql = "INSERT INTO {$this->table} (title, slug, price, sale_price, description) VALUES (?, ?, ?, ?, ?)";
         $params = [
