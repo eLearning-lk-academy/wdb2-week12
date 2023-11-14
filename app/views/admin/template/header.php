@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title><?=$title ?? 'Dashboard' ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -215,15 +215,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="<?=base_url("admin")?>" class="nav-link active">
+          <li class="nav-item">
+            <a href="<?=base_url("admin")?>" class="nav-link  <?=matchURL('/admin')?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?=matchPath('/admin/products')?> ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -231,15 +231,15 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview ">
               <li class="nav-item">
-                <a href="<?=base_url("admin/products")?>" class="nav-link">
+                <a href="<?=base_url("admin/products")?>" class="nav-link <?=matchURL('/admin/products')?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url("admin/products/add")?>" class="nav-link">
+                <a href="<?=base_url("admin/products/add")?>" class="nav-link <?=matchURL('/admin/products/add')?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add products</p>
                 </a>
@@ -260,12 +260,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0"><?=$title ?? 'Dashboard'?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <?php if(!empty($breadCrumbs)):  foreach($breadCrumbs as $name => $url): ?>
+                <li class="breadcrumb-item <?=matchURL('/'.$url)?>"><a href="<?=base_url($url)?>"><?=$name?></a></li>
+              <?php  endforeach; else: ?>
+                <li class="breadcrumb-item ">Dashboard</li>
+              <?php endif; ?>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

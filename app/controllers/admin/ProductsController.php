@@ -8,12 +8,27 @@ class ProductsController extends AdminController{
     }
 
     public function index(){
-        $products = $this->model->getAllProducts();
-        return adminView("products.index", compact("products") );
+        $viewArgs = ['title' => "All Products"];
+
+        $viewArgs['products'] = $this->model->getAllProducts();
+        $viewArgs['breadCrumbs'] = [
+            'Dashboard' => 'admin',
+            'Products' => 'admin/products',
+        ];
+
+        matchPath('admin/products');
+
+        return adminView("products.index", $viewArgs );
     }
 
     public function add(){
-        return adminView("products.add");
+        $viewArgs = ['title' => "All Products"];
+        $viewArgs['breadCrumbs'] = [
+            'Dashboard' => 'admin',
+            'Products' => 'admin/products',
+            'Add' => 'admin/products/add',
+        ];
+        return adminView("products.add", $viewArgs);
     }
 
     public function save(){
@@ -32,9 +47,15 @@ class ProductsController extends AdminController{
     }
 
     public function edit($id){
-        $product = $this->model->getById($id);
+        $viewArgs = ['title' => "All Products"];
+        $viewArgs['breadCrumbs'] = [
+            'Dashboard' => 'admin',
+            'Products' => 'admin/products',
+            'Add' => 'admin/products/add',
+        ];
+        $viewArgs['product'] = $this->model->getById($id);
         
-        return adminView('products.edit', compact('product'));
+        return adminView('products.edit', $viewArgs);
     }
 
     public function update($id){

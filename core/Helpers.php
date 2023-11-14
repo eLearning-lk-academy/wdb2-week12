@@ -21,3 +21,26 @@ function session( $key = null, $value = null ){
         return $_SESSION;
     }
 }
+
+function matchURL($path){
+    $url = $_SERVER['REQUEST_URI'];
+    $url = rtrim($url,'/');
+
+    if ($path == $url) {
+        return 'active';
+    }
+    return false;
+}
+
+function matchPath($path){
+    $url = $_SERVER['REQUEST_URI'];
+    $url = rtrim($url,'/');
+
+    $routePattern = $path.'.*';
+    $routePattern = '@^' . $routePattern . '$@';
+
+    if(preg_match($routePattern, $url, $matches)){
+        return 'menu-open';
+    }
+    return false;
+}
