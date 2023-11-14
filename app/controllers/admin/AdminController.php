@@ -7,7 +7,4 @@ class AdminController extends MainController{
         }
     }
 
-    public function index(){
-        return adminView("login");
-    }
 }

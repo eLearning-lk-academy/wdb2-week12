@@ -20,8 +20,7 @@ $routes = [
 
     // admin
 
-    '/admin' =>['admin/AdminController', 'index' ],
-    '/admin/dash' =>['admin/DashboardController', 'index' ],
+    '/admin' =>['admin/DashboardController', 'index' ],
     
 ];
 
