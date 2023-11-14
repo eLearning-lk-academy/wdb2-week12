@@ -1,7 +1,7 @@
 <?php 
 
 
-class UserController{
+class UserController extends MainController{
     public function index($id){
         $user = new UserModel();
         // $user = $user->getUser(1);
@@ -17,16 +17,29 @@ class UserController{
     }
 
     public function login(){
-        $title = "User Login";
 
+        if($this->isLoggedIn()){
+            dd('logged in');
+        }
+
+        $title = "User Login";
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $userModel = new UserModel();
             $user = $userModel->getByEmail($_POST['email']);
             
             if($user){
                if(password_verify($_POST['password'], $user['password'])){
-                echo 'Login Success';
-                dd($user);
+                $data = [
+                    'id' => $user['id'],
+                    'first_name' => $user['first_name'],
+                    'last_name' => $user['last_name'],
+                    'name' => $user['first_name'].' '.$user['last_name'],
+                    'email' => $user['email'],
+                    'username' => $user['username'],
+                    'role' => $user['role'],
+                    'logged_in' => true,
+                ];
+                $this->setUserData($data);
                }else{
                 echo 'password not match';
                }
@@ -119,6 +132,11 @@ class UserController{
             dd($e);    
         
         }
+    }
+
+    public function logOut(){
+        session_destroy();
+        header("Location: /");
     }
         
 

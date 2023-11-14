@@ -2,18 +2,13 @@
 
 $routes = [
     '/'  => ['HomeController', 'index' ],
-    '/about' => ['HomeController', 'about'],
-    '/save' => ['HomeController', 'save' ],
-    'POST:/save' => ['HomeController', 'add'],
-    '/page/:id' => ['HomeController', 'page'],
-    'POST:/page/:id//:id' => ['HomeController', 'page'],
 
-    
     '/user/:id' => ['UserController', 'index' ],
     '/user/register' => ['UserController', 'register' ],
     'POST:/user/register' => ['UserController', 'add' ],
 
     '/user/login' => ['UserController', 'login' ],
+    '/user/logout' => ['UserController', 'logOut' ],
     'POST:/user/login' => ['UserController', 'login' ],
 
     '/user/password-reset' => ['UserController', 'passwordReset' ],
@@ -21,6 +16,12 @@ $routes = [
 
     '/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
     'POST:/user/password-reset-verify' => ['UserController', 'verifyPasswordReset' ],
+
+
+    // admin
+
+    '/admin' =>['admin/AdminController', 'index' ],
+    '/admin/dash' =>['admin/DashboardController', 'index' ],
     
 ];
 
@@ -51,7 +52,9 @@ foreach ($routes as $route => $action ) {
         
         
         if($_SERVER['REQUEST_METHOD'] == $method){
-            $controllerName = $action[0];
+
+            $controllerPath = explode('/', $action[0]);
+            $controllerName = $controllerPath[count($controllerPath)-1];
             $method = $action[1];
             $controller = new $controllerName();
             // $controller->$method($matches[0]);

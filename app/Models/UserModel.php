@@ -66,6 +66,14 @@ class UserModel extends Model{
         return $token;
     }
 
+    public function getAdminByEmail($email){
+        $sql = "SELECT * FROM {$this->table} WHERE email = :email AND role = 1";
+        $params = [
+            ':email' => $email
+        ];
+        return $this->db->getRow($sql, $params);
+    }
+
 
 }
 ?>

@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 include __DIR__."/db.php";
 include __DIR__."/Helpers.php";
 include __DIR__."/Autoloader.php";
@@ -27,6 +27,21 @@ function view($view, $data=[]){
         require_once "../app/views/template/header.php";
         require_once $viewPath;
         require_once "../app/views/template/footer.php";
+    }else{
+        die("View $view not found");
+    }
+}
+
+function adminView($view, $data=[]){
+    $view = str_replace(".","/", $view);
+    $viewPath = "../app/views/admin/$view.php";
+    
+
+    if(file_exists($viewPath)){
+        extract($data);
+        require_once "../app/views/admin/template/header.php";
+        require_once $viewPath;
+        require_once "../app/views/admin/template/footer.php";
     }else{
         die("View $view not found");
     }
