@@ -55,7 +55,13 @@ class db
 
     public function updateRow( $query, $params = array()){
         $query = $this->query($query, $params);
-        return $query->rowCount();
+        return $query;
+    }
+
+    public function deleteRow($table, $id){
+        $sql = 'DELETE FROM '.$table.' WHERE id = ?';
+        $statement = $this->query($sql, [ $id ]);
+        return $statement;
     }
 
 }

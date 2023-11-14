@@ -1,27 +1,4 @@
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-3 col-6">
@@ -599,9 +576,20 @@
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
+        
+<!-- ChartJS -->
+<script src="<?=base_url("assets/plugins/chart.js/Chart.min.js")?>"></script>
+<!-- Sparkline -->
+<script src="<?=base_url("assets/plugins/sparklines/sparkline.js")?>"></script>
+<!-- JQVMap -->
+<script src="<?=base_url("assets/plugins/jqvmap/jquery.vmap.min.js")?>"></script>
+<script src="<?=base_url("assets/plugins/jqvmap/maps/jquery.vmap.usa.js")?>"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?=base_url("assets/plugins/jquery-knob/jquery.knob.min.js")?>"></script>
+<!-- daterangepicker -->
+<script src="<?=base_url("assets/plugins/moment/moment.min.js")?>"></script>
+<script src="<?=base_url("assets/plugins/daterangepicker/daterangepicker.js")?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?=base_url("assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js")?>"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?=base_url("assets/admin/js/pages/dashboard.js")?>"></script>

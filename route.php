@@ -21,6 +21,16 @@ $routes = [
     // admin
 
     '/admin' =>['admin/DashboardController', 'index' ],
+
+    // products
+    '/admin/products' =>['admin/ProductsController', 'index' ],
+    '/admin/products/add' =>['admin/ProductsController', 'add' ],
+    'POST:/admin/products/save' =>['admin/ProductsController', 'save' ],
+
+    '/admin/products/edit/:id' =>['admin/ProductsController', 'edit' ],
+    'POST:/admin/products/update/:id' =>['admin/ProductsController', 'update' ],
+
+    '/admin/products/delete/:id'=> ['admin/ProductsController','delete'],
     
 ];
 
